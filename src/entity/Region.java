@@ -6,8 +6,8 @@ public class Region {
     private String code;
     
     //constructor
-	public Region(String name, String code) {
-		super();
+	public Region(int id,String name, String code) {
+		this.id = id;
 		this.name = name;
 		this.code = code;
 	}
@@ -22,6 +22,18 @@ public class Region {
 
 	public String getCode() {
 		return code;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override

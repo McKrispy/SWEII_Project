@@ -14,7 +14,6 @@ public class Ingredient {
 	
 
 	public Ingredient(String name) {
-		super();
 		this.name = name;
 	}
 
@@ -22,10 +21,6 @@ public class Ingredient {
 	//getters&setters
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;
