@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-      "/Users/a1/Downloads/WorkSpace/SWE_II_Project/javafx-sdk-24.0.1/lib/**/*.jar"
-    ],
-    "java.project.sourcePaths": ["src"]
-  }
