@@ -1,16 +1,18 @@
 package controller;
 
-import entity.Recipe; // 确保你的Recipe实体类在这个包路径下
+import dao.RecipeDAO; // 新增导入
+import dao.RecipeDAOImpl; // 新增导入
+import entity.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell; // 新增导入
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List; // 修改为 java.util.List
 import java.util.ResourceBundle;
 
 /**
@@ -29,8 +31,8 @@ public class MainViewController implements Initializable {
     @FXML
     private ListView<Recipe> recipeListView;
 
-    // --- 后端服务接口 (未来将替换为真实实现) ---
-    // private RecipeDAO recipeDAO;
+    // --- 后端服务接口 (现在使用真实的实现) ---
+    private RecipeDAO recipeDAO; // 声明为接口类型
 
     /**
      * 当 FXML 文件加载完成，所有 @FXML 成员被注入后，此方法会自动调用。
@@ -40,8 +42,8 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("MainViewController is initializing...");
         
-        // 在未来，这里会初始化真正的DAO实现
-        // this.recipeDAO = new RecipeDAOImpl(); 
+        // 实例化真正的DAO实现
+        this.recipeDAO = new RecipeDAOImpl(); 
 
         // 1. 配置ListView如何显示Recipe对象
         setupListViewCellFactory();
@@ -77,18 +79,10 @@ public class MainViewController implements Initializable {
      */
     private void loadAllRecipes() {
         System.out.println("Loading all recipes...");
-        // 理想情况: List<Recipe> recipes = recipeDAO.getAllRecipes();
+        List<Recipe> recipes = recipeDAO.getAllRecipes(); // 使用DAO获取数据
         
-        // --- 模拟数据 ---
-        ArrayList<Recipe> mockRecipes = new ArrayList<>();
-        // 确保你的Recipe类有一个接收name和description的构造函数
-        mockRecipes.add(new Recipe("Spaghetti Carbonara", "Classic Italian pasta dish."));
-        mockRecipes.add(new Recipe("Chicken Curry", "Spicy and flavorful curry."));
-        mockRecipes.add(new Recipe("Tiramisu", "Famous Italian coffee-flavored dessert."));
-        // -----------------
-
         recipeListView.getItems().clear();
-        recipeListView.getItems().addAll(mockRecipes);
+        recipeListView.getItems().addAll(recipes);
     }
 
     /**
@@ -96,19 +90,10 @@ public class MainViewController implements Initializable {
      */
     private void searchRecipes(String name) {
         System.out.println("Searching for recipes named: " + name);
-        // 理想情况: List<Recipe> recipes = recipeDAO.searchRecipesByName(name);
-
-        // --- 模拟数据 ---
-        ArrayList<Recipe> mockResults = new ArrayList<>();
-        if (name.equalsIgnoreCase("pasta")) { // 简单的模拟逻辑
-             mockResults.add(new Recipe("Spaghetti Carbonara", "Classic Italian pasta dish."));
-        } else {
-             mockResults.add(new Recipe("Found: " + name, "This is a search result."));
-        }
-        // -----------------
+        List<Recipe> recipes = recipeDAO.searchRecipesByName(name); // 使用DAO获取数据
         
         recipeListView.getItems().clear();
-        recipeListView.getItems().addAll(mockResults);
+        recipeListView.getItems().addAll(recipes);
     }
 
 
