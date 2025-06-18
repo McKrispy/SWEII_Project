@@ -14,8 +14,8 @@
    <left>
       <VBox spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button text="Search Recipes" />
-            <Button text="Create New Recipe" />
+            <Button text="Search Recipes" onAction="#handleSearchRecipes"/>
+            <Button text="Create New Recipe" onAction="#handleCreateNewRecipe"/>
             <Button text="Recommended Dishes" />
          </children>
          <padding>

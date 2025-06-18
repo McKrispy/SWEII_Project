@@ -1,9 +1,17 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CreateRecipeController {
 
@@ -67,4 +75,26 @@ public class CreateRecipeController {
         alert.setContentText("Recipe \"" + name + "\" submitted successfully!");
         alert.showAndWait();
     }
+    @FXML
+    private void handleSearchRecipes(ActionEvent event) {
+        System.out.println("左侧导航按钮：Search Recipes 被点击");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+            Parent root = loader.load();  // 加载FXML文件
+
+            // 获取当前窗口Stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // 创建一个新的Scene并设置到Stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Recipe List");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // 可选: 弹出错误提示
+        }
+    }
+
 }

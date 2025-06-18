@@ -6,14 +6,19 @@ import entity.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.List; // 修改为 java.util.List
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 /**
  * 主视图的控制器。
@@ -136,14 +141,68 @@ public class MainViewController implements Initializable {
     @FXML
     private void handleSearchRecipes(ActionEvent event) {
         System.out.println("左侧导航按钮：Search Recipes 被点击");
+
+        try {
+            // 加载 CreateRecipeView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+            Parent createRecipeRoot = loader.load();
+            System.out.println("FXML 加载成功");
+
+            // 获取当前按钮所在的窗口
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // 创建新场景并设置到当前舞台
+            Scene createRecipeScene = new Scene(createRecipeRoot);
+            currentStage.setScene(createRecipeScene);
+            currentStage.setTitle("Create New Recipe");
+            System.out.println("跳转成功");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("无法打开创建食谱页面", e.getMessage());
+        }
+
         loadAllRecipes();
     }
 
     @FXML
     private void handleCreateNewRecipe(ActionEvent event) {
         System.out.println("左侧导航按钮：Create New Recipe 被点击");
-        // TODO: 切换到 CreateRecipeView.fxml
+
+        try {
+            // 加载 CreateRecipeView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateRecipeView.fxml"));
+            Parent createRecipeRoot = loader.load();
+            System.out.println("FXML 加载成功");
+
+            // 获取当前按钮所在的窗口
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // 创建新场景并设置到当前舞台
+            Scene createRecipeScene = new Scene(createRecipeRoot);
+            currentStage.setScene(createRecipeScene);
+            currentStage.setTitle("Create New Recipe");
+            System.out.println("跳转成功");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("无法打开创建食谱页面", e.getMessage());
+        }
+
     }
+
+
+    /**
+     * 显示错误对话框的通用方法（可选）
+     */
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("错误");
+        alert.setHeaderText(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML
     private void handleRecommendedDishes(ActionEvent event) {
