@@ -1,7 +1,7 @@
 package controller;
 
-import dao.RecipeDAO; // 新增导入
-import dao.RecipeDAOImpl; // 新增导入
+import DAO.RecipeDAO; // 新增导入
+import DAO.RecipeDAOImpl; // 新增导入
 import entity.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

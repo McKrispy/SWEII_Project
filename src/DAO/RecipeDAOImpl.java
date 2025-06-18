@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import entity.Recipe;
 import entity.Region;
@@ -79,24 +79,28 @@ public class RecipeDAOImpl implements RecipeDAO {
      */
     private Recipe createRecipeFromResultSet(ResultSet rs) throws SQLException {
         Recipe recipe = new Recipe(
-            rs.getString("name"),
-            rs.getInt("servings")
+                rs.getString("name"),
+                rs.getInt("servings")
         );
         recipe.setId(rs.getInt("id"));
         recipe.setDescription(rs.getString("description"));
         recipe.setImagePath(rs.getString("imagePath"));
 
-        // 处理 Region
         int regionId = rs.getInt("region_id");
-        if (!rs.wasNull("region_id")) { // 检查 region_id 是否为 NULL
-            Region region = new Region();
+        if (!rs.wasNull()) { // 正确调用
+
+            String regionName = rs.getString("region_name");
+            String regionCode = rs.getString("region_code");
+            Region region = new Region(regionId, regionName, regionCode);
             region.setId(regionId);
             region.setName(rs.getString("region_name"));
             region.setCode(rs.getString("region_code"));
             recipe.setRegion(region);
         }
+
         return recipe;
     }
+
 
     /**
      * 关闭 PreparedStatement 和 ResultSet。

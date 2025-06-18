@@ -1,7 +1,7 @@
 package entity;
 
-public class main {
-    public static void main(String[] args) {
+public class EntityTest {
+    public static void EntityTest(String[] args) {
         // 1. Create regions
         Region china = new Region(1, "China", "CN");
         Region italy = new Region(2, "Italy", "IT");

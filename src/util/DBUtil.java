@@ -9,10 +9,9 @@ import java.sql.SQLException;
  * 提供了获取和关闭数据库连接的方法。
  */
 public class DBUtil {
-    // 数据库连接参数，请根据你的实际情况修改
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3307/refactored_se2?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root"; // 你的数据库用户名
-    private static final String PASSWORD = ""; // 你的数据库密码
+    private static final String URL = "jdbc:mysql://localhost:3306/refactored_se2?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "123456";  // 这里改成你的MySQL密码
 
     /**
      * 获取数据库连接。
@@ -20,7 +19,7 @@ public class DBUtil {
      * @throws SQLException 如果数据库连接失败。
      */
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
     /**

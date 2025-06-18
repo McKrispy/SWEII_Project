@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import entity.Recipe;
 import java.util.List;
