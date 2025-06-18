@@ -41,9 +41,9 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("MainViewController is initializing...");
-        
+
         // 实例化真正的DAO实现
-        this.recipeDAO = new RecipeDAOImpl(); 
+        this.recipeDAO = new RecipeDAOImpl();
 
         // 1. 配置ListView如何显示Recipe对象
         setupListViewCellFactory();
@@ -80,7 +80,7 @@ public class MainViewController implements Initializable {
     private void loadAllRecipes() {
         System.out.println("Loading all recipes...");
         List<Recipe> recipes = recipeDAO.getAllRecipes(); // 使用DAO获取数据
-        
+
         recipeListView.getItems().clear();
         recipeListView.getItems().addAll(recipes);
     }
@@ -91,7 +91,7 @@ public class MainViewController implements Initializable {
     private void searchRecipes(String name) {
         System.out.println("Searching for recipes named: " + name);
         List<Recipe> recipes = recipeDAO.searchRecipesByName(name); // 使用DAO获取数据
-        
+
         recipeListView.getItems().clear();
         recipeListView.getItems().addAll(recipes);
     }
@@ -127,10 +127,28 @@ public class MainViewController implements Initializable {
             if (newValue != null) {
                 Recipe selectedRecipe = newValue;
                 System.out.println("User selected recipe: " + selectedRecipe.getName());
-    
+
                 // TODO: 在这里实现导航到食谱详情页的逻辑
-                // navigateToRecipeDetail(selectedRecipe); 
+                // navigateToRecipeDetail(selectedRecipe);
             }
         });
     }
+    @FXML
+    private void handleSearchRecipes(ActionEvent event) {
+        System.out.println("左侧导航按钮：Search Recipes 被点击");
+        loadAllRecipes();
+    }
+
+    @FXML
+    private void handleCreateNewRecipe(ActionEvent event) {
+        System.out.println("左侧导航按钮：Create New Recipe 被点击");
+        // TODO: 切换到 CreateRecipeView.fxml
+    }
+
+    @FXML
+    private void handleRecommendedDishes(ActionEvent event) {
+        System.out.println("左侧导航按钮：Recommended Dishes 被点击");
+        // TODO: 实现推荐算法或跳转页面
+    }
+
 }
